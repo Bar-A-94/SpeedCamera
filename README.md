@@ -36,17 +36,22 @@ Run the main script
 
 ## Dependencies
 YOLOv8
-CamGear
-OpenCV
-cvzone
-License
 
+CamGear
+
+OpenCV
+
+cvzone
 
 ## Acknowledgments
 YOLOv8 - Ultralytics
+
 CamGear - AbhiTronix
+
 OpenCV - OpenCV team
+
 cvzone - Augmented Startups
+
 
 ## Contributing
 Feel free to contribute by opening issues or pull requests. Your feedback and suggestions are highly appreciated!
