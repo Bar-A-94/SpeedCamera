@@ -2,7 +2,24 @@ import math
 
 
 class Tracker:
+    """
+        This class implements object tracking by assigning unique IDs to detected objects based on their center positions and
+        dimensions
+
+        Attributes:
+        - center_points (dict): Dictionary storing the center positions of tracked objects along with their width and height.
+        - id_count (int): Counter for assigning unique IDs to newly detected objects.
+        - num_of_frames (int): Counter to keep track of the number of processed frames.
+        - new_center_points (dict): Temporary dictionary to store updated center positions during the tracking process.
+
+        Methods:
+        - __init__(): Initializes the Tracker instance with empty dictionaries and counters.
+        - update(objects_rect): Updates the tracking information based on the detected object rectangles.
+                                Returns a list of object bounding boxes along with their assigned IDs.
+        """
+
     def __init__(self):
+        """Initializes the Tracker instance with empty dictionaries and counters."""
         # Store the center positions of the objects and the width and height
         self.center_points = {}
         # Keep the count of the IDs - each time a new object id_num detected, the count will increase
@@ -12,6 +29,15 @@ class Tracker:
         self.new_center_points = {}
 
     def update(self, objects_rect):
+        """
+            Updates the tracking information based on the detected object rectangles.
+
+            Args:
+                - objects_rect (list): List of rectangles representing detected objects.
+
+            Returns:
+                - objects_bbs_ids (list): List of object bounding boxes along with their assigned IDs.
+        """
         # Object boxes and ids
         objects_bbs_ids = []
 
