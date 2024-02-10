@@ -3,12 +3,13 @@
 ## Overview
 
 This project implements a speed camera using object detection techniques. It leverages the YOLOv8 model for object detection, CamGear for video streaming, and OpenCV for image processing. The system is designed to detect and track vehicles, calculate their speeds, and display the results on the video stream.
-
+![main_pic](SpeedCamera-1-Thumbnail.jpg)
 ## Features
 
 ### 1. Customizable Video Source
 
 Users have the flexibility to insert their own video source URL, allowing this speed camera system to be adapted for any camera setup. This feature enables users to monitor traffic from various sources beyond the provided example video.
+![sec_pic](Speed-camera.png)
 
 ### 2. User-Defined Speed Lines
 
@@ -53,6 +54,7 @@ The `speed_check` module contains the `SpeedCheck` class, which calculates the s
 ### 4. `setup.py`
 
 The `setup` module assists users in customizing their speed camera setup. It prompts users to input their video source URL and mark their own speed lines. This flexibility allows the system to be adapted for various cameras and road configurations.
+
 
 ### 5. `draw.py`
 
