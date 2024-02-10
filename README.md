@@ -34,6 +34,30 @@ Download the YOLOv8 model weights (e.g., yolov8s.pt) and place them in the proje
 
 Run the main script
 
+## File Overview
+
+This section provides a brief overview of each file in the project:
+
+### 1. `main.py`
+
+The main script orchestrating the speed camera system. It utilizes the YOLOv8 model for object detection, CamGear for video streaming, and OpenCV for image processing. This script initiates the entire speed camera workflow, from user setup prompts to real-time video processing.
+
+### 2. `tracker.py`
+
+The `tracker` module is responsible for identifying and tracking vehicles in the video stream. It features an enhanced algorithm for object ID assignment, efficient object matching, and dynamic ID management. The improvements contribute to a more adaptive and reliable tracking system tailored for the speed camera application.
+
+### 3. `speed_check.py`
+
+The `speed_check` module contains the `SpeedCheck` class, which calculates the speed of detected objects based on their movement across speed lines. It uses distance and time measurements to determine the speed of each object and displays the results on the video stream.
+
+### 4. `setup.py`
+
+The `setup` module assists users in customizing their speed camera setup. It prompts users to input their video source URL and mark their own speed lines. This flexibility allows the system to be adapted for various cameras and road configurations.
+
+### 5. `draw.py`
+
+The `draw` module includes utility functions used across the project, such as drawing lines and object information on the video frame. These functions contribute to the visual representation of the speed camera system.
+
 ## Dependencies
 YOLOv8
 
