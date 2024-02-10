@@ -3,20 +3,20 @@ import math
 
 class Tracker:
     """
-        This class implements object tracking by assigning unique IDs to detected objects based on their center positions and
-        dimensions
+    This class implements object tracking by assigning unique IDs to detected objects based on their center positions and
+    dimensions
 
-        Attributes:
-        - center_points (dict): Dictionary storing the center positions of tracked objects along with their width and height.
-        - id_count (int): Counter for assigning unique IDs to newly detected objects.
-        - num_of_frames (int): Counter to keep track of the number of processed frames.
-        - new_center_points (dict): Temporary dictionary to store updated center positions during the tracking process.
+    Attributes:
+    - center_points (dict): Dictionary storing the center positions of tracked objects along with their width and height.
+    - id_count (int): Counter for assigning unique IDs to newly detected objects.
+    - num_of_frames (int): Counter to keep track of the number of processed frames.
+    - new_center_points (dict): Temporary dictionary to store updated center positions during the tracking process.
 
-        Methods:
-        - __init__(): Initializes the Tracker instance with empty dictionaries and counters.
-        - update(objects_rect): Updates the tracking information based on the detected object rectangles.
-                                Returns a list of object bounding boxes along with their assigned IDs.
-        """
+    Methods:
+    - __init__(): Initializes the Tracker instance with empty dictionaries and counters.
+    - update(objects_rect): Updates the tracking information based on the detected object rectangles.
+                            Returns a list of object bounding boxes along with their assigned IDs.
+    """
 
     def __init__(self):
         """Initializes the Tracker instance with empty dictionaries and counters."""
@@ -30,13 +30,13 @@ class Tracker:
 
     def update(self, objects_rect):
         """
-            Updates the tracking information based on the detected object rectangles.
+        Updates the tracking information based on the detected object rectangles.
 
-            Args:
-                - objects_rect (list): List of rectangles representing detected objects.
+        Args:
+            - objects_rect (list): List of rectangles representing detected objects.
 
-            Returns:
-                - objects_bbs_ids (list): List of object bounding boxes along with their assigned IDs.
+        Returns:
+            - objects_bbs_ids (list): List of object bounding boxes along with their assigned IDs.
         """
         # Object boxes and ids
         objects_bbs_ids = []

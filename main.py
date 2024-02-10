@@ -1,14 +1,44 @@
 from tkinter import simpledialog, messagebox
 
-import cv2
-import cvzone
 import pandas as pd
 from ultralytics import YOLO
 from vidgear.gears import CamGear
 
+from draw import *
 from setup import setup
 from speed_check import *
 from tracker import *
+
+
+def detect_objects(frame, model, class_list):
+    """
+    Detects objects in the given frame using a pre-trained model.
+
+    Parameters:
+        - frame (numpy.ndarray): The input image frame.
+        - model: The pre-trained object detection model.
+        - class_list (list): List of class labels corresponding to the model output.
+
+    Returns:
+        list: A list of detected objects, where each object is represented as [x1, y1, x2, y2],
+              denoting the bounding box coordinates of the object.
+    """
+    results = model.predict(frame, verbose=False)
+    a = results[0].boxes.data
+    px = pd.DataFrame(a).astype("float")
+    objects = []
+
+    for index, row in px.iterrows():
+        c = class_list[int(row[5])]
+        if 'car' in c:
+            objects.append([int(row[0]), int(row[1]), int(row[2]), int(row[3])])
+
+    return objects
+
+
+# Configuration Constants
+FRAME_SKIP = 4
+RESIZE_DIMENSIONS = (1020, 500)
 
 # Model init
 model = YOLO('yolov8s.pt')
@@ -49,23 +79,12 @@ while True:
     frame = stream.read()
     # Act every fourth frame to improve latency
     count += 1
-    if count % 4 != 0:
+    if count % FRAME_SKIP != 0:
         continue
-    objects = []
-    frame = cv2.resize(frame, (1020, 500))
-
-    # Detect the objects in the frame using the model
-    results = model.predict(frame, verbose=False)
-    a = results[0].boxes.data
-    px = pd.DataFrame(a).astype("float")
-
-    # Go through the objects and store only cars
-    for index, row in px.iterrows():
-        c = class_list[int(row[5])]
-        if 'car' in c:
-            objects.append([int(row[0]), int(row[1]), int(row[2]), int(row[3])])
+    frame = cv2.resize(frame, RESIZE_DIMENSIONS)
 
     # Monitor the items and determine whether any of them were recognized in the previous frames.
+    objects = detect_objects(frame, model, class_list)
     bbox_idx = tracker.update(objects)
 
     for bbox in bbox_idx:
@@ -73,26 +92,13 @@ while True:
         cx = int(x1 + x2) // 2
         cy = int(y1 + y2) // 2
         speed.check(id_num, cx, cy)
+        draw_object_info(frame, x1, y1, x2, y2, id_num, speed, cx, cy)
 
-        # Draw a dot in the middle of the object, rectangle around it, and id_number num aside it
-        cv2.circle(frame, (cx, cy), 4, (0, 0, 255), -1)
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 255, 255), 2)
-        cvzone.putTextRect(frame, f'{id_num}', (x1, y1), 1, 1)
-
-        # If speed could be calculated then add it to the video
-        if id_num in speed.final_speed:
-            cv2.putText(frame, str(speed.final_speed[id_num]) + ' km/h', (x2, y2), cv2.FONT_HERSHEY_COMPLEX, 0.8,
-                        (255, 255, 255), 2)
-
-    # Draw the lines
-    cv2.line(frame, line1[0], line1[1], (255, 255, 255), 1)
-    cv2.line(frame, line2[0], line2[1], (255, 255, 255), 1)
-    cvzone.putTextRect(frame, 'Line1', (line1[0][0], line1[0][1]+20), 1, 1)
-    cvzone.putTextRect(frame, 'Line2', (line2[0][0], line2[0][1]+20), 1, 1)
-
+    draw_lines(frame, line1, line2)
     cv2.imshow("Speed camera", frame)
 
     # Wait for escape to end the streaming
     if cv2.waitKey(1) & 0xFF == 27:
         break
+
 cv2.destroyAllWindows()

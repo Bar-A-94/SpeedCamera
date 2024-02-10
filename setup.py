@@ -42,14 +42,12 @@ class setup:
 
     def RGB(self, event, x, y, _, __):
         """
-            Callback function for handling mouse clicks to define line points.
+        Callback function for handling mouse clicks to define line points.
 
-            Args:
-                - event: The type of mouse event (e.g., cv2.EVENT_LBUTTONDOWN).
-                - x (int): x-coordinate of the mouse click.
-                - y (int): y-coordinate of the mouse click.
-                - _: Additional parameters (not used).
-                - __: Additional parameters (not used).
+        Args:
+        - event: The type of mouse event (e.g., cv2.EVENT_LBUTTONDOWN).
+        - x (int): x-coordinate of the mouse click.
+        - y (int): y-coordinate of the mouse click.
         """
         if event == cv2.EVENT_LBUTTONDOWN:
             colorsBGR = [x, y]
@@ -68,7 +66,7 @@ class setup:
 
     def set_pref(self):
         """
-            Sets up the environment for line marking and distance input.
+        Sets up the environment for line marking and distance input.
         """
         setup_stream = CamGear(source=self.source, stream_mode=True, logging=False).start()
         cv2.namedWindow('SetUp')
