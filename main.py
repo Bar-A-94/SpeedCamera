@@ -18,8 +18,8 @@ class_list = data.split("\n")
 tracker = Tracker()
 
 # Starting parameters
-line1 = [(366, 225), (643, 225)]
-line2 = [(320, 301), (714, 301)]
+line1 = [(260, 200), (715, 200)]
+line2 = [(144, 301), (850, 301)]
 count = 0
 
 # Ask the user for his preference
@@ -36,7 +36,7 @@ if user_lines == "yes":
     line2 = user_set.line2
     meter = user_set.distance
 else:
-    meter = 13
+    meter = 17
 
 # Prepare the speed check class
 speed = speed_check(line1, line2, meter)
@@ -59,7 +59,7 @@ while True:
     a = results[0].boxes.data
     px = pd.DataFrame(a).astype("float")
 
-    # Go through the objects and store only busses, trucks and cars
+    # Go through the objects and store only cars
     for index, row in px.iterrows():
         c = class_list[int(row[5])]
         if 'car' in c:
@@ -87,8 +87,8 @@ while True:
     # Draw the lines
     cv2.line(frame, line1[0], line1[1], (255, 255, 255), 1)
     cv2.line(frame, line2[0], line2[1], (255, 255, 255), 1)
-    cvzone.putTextRect(frame, 'Line1', (line1[0][0], line1[0][1]), 1, 1)
-    cvzone.putTextRect(frame, 'Line2', (line2[0][0], line2[0][1]), 1, 1)
+    cvzone.putTextRect(frame, 'Line1', (line1[0][0], line1[0][1]+20), 1, 1)
+    cvzone.putTextRect(frame, 'Line2', (line2[0][0], line2[0][1]+20), 1, 1)
 
     cv2.imshow("Speed camera", frame)
 

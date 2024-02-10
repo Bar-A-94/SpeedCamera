@@ -45,8 +45,8 @@ class setup:
             setup_frame = cv2.resize(setup_frame, (1020, 500))
             cv2.line(setup_frame, self.line1[0], self.line1[1], (255, 255, 255), 1)
             cv2.line(setup_frame, self.line2[0], self.line2[1], (255, 255, 255), 1)
-            cvzone.putTextRect(setup_frame, 'Line1', (self.line1[0][0], self.line1[0][1]), 1, 1)
-            cvzone.putTextRect(setup_frame, 'Line2', (self.line2[0][0], self.line2[0][1]), 1, 1)
+            cvzone.putTextRect(setup_frame, 'Line1', (self.line1[0][0], self.line1[0][1]+20), 1, 1)
+            cvzone.putTextRect(setup_frame, 'Line2', (self.line2[0][0], self.line2[0][1]+20), 1, 1)
             cv2.imshow("SetUp", setup_frame)
             if cv2.waitKey(0) & 0xFF == 27:
                 break

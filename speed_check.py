@@ -29,7 +29,7 @@ class speed_check:
             elif self.start_time[id_number][2]:
                 if self.start_time[id_number][1] >= d1 or not self.start_time[id_number][1]:
                     self.elapsed_time[id_number] = time.perf_counter() - self.start_time[id_number][0]
-                    self.final_speed = int(3.6 * self.meter / self.elapsed_time[id_number])
+                    self.final_speed[id_number] = int(3.6 * self.meter / self.elapsed_time[id_number])
                     self.start_time[id_number] = (self.start_time[id_number][0], d1, self.start_time[id_number][2])
         if d2 < 10:
             if id_number not in self.start_time:
@@ -39,5 +39,5 @@ class speed_check:
             elif self.start_time[id_number][1]:
                 if self.start_time[id_number][2] >= d2 or not self.start_time[id_number][2]:
                     self.elapsed_time[id_number] = time.perf_counter() - self.start_time[id_number][0]
-                    self.final_speed = int(3.6 * self.meter / self.elapsed_time[id_number])
+                    self.final_speed[id_number] = int(3.6 * self.meter / self.elapsed_time[id_number])
                     self.start_time[id_number] = (self.start_time[id_number][0], self.start_time[id_number][1], d2)
