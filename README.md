@@ -1,83 +1,61 @@
-# Speed Camera with Object Detection
+<div align="center">
 
-## Overview
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,50:203a43,100:2c5364&height=180&section=header&text=Speed%20Camera&fontSize=40&fontColor=ffffff&fontAlignY=36&animation=fadeIn&desc=Vehicle%20detection%2C%20tracking%20and%20speed%20estimation&descSize=15&descAlignY=58" width="100%" />
 
-This project implements a speed camera using object detection techniques. It leverages the YOLOv8 model for object detection, CamGear for video streaming, and OpenCV for image processing. The system is designed to detect and track vehicles, calculate their speeds, and display the results on the video stream.
-![main_pic](SpeedCamera-1-Thumbnail.jpg)
-## Features
+**A speed camera built on YOLOv8 object detection and a custom tracker**
 
-### 1. Customizable Video Source
+<img src="https://img.shields.io/badge/Python-30363d?style=for-the-badge&logo=python&logoColor=FFD43B" />
+<img src="https://img.shields.io/badge/YOLOv8-30363d?style=for-the-badge&logo=yolo&logoColor=00FFFF" />
+<img src="https://img.shields.io/badge/OpenCV-30363d?style=for-the-badge&logo=opencv&logoColor=5C3EE8" />
 
-Users have the flexibility to insert their own video source URL, allowing this speed camera system to be adapted for any camera setup. This feature enables users to monitor traffic from various sources beyond the provided example video.
-![sec_pic](Speed-camera.png)
+</div>
 
-### 2. User-Defined Speed Lines
+<br/>
 
-Users can mark up their own speed lines, defining the specific regions for speed calculations. This customization allows for the adaptation of the system to diverse road configurations and user preferences.
+<p align="center">
+  <img src="SpeedCamera-1-Thumbnail.jpg" width="80%" alt="Speed camera demo" />
+</p>
 
-### 3. Enhanced Tracker
+> [!NOTE]
+> Point it at any video stream, draw your own speed lines, and it detects, tracks and measures the speed of every vehicle.
 
-The tracker module has been significantly improved with the following features:
+## ✨ Features
 
-- **Improved Object ID Assignment:** The tracker now utilizes a more robust algorithm to assign and update unique IDs to detected objects, ensuring accurate tracking even in challenging scenarios.
-  
-- **Efficient Object Matching:** Enhancements in object matching algorithms contribute to improved accuracy in identifying and tracking vehicles across consecutive frames.
-  
-- **Dynamic ID Management:** The tracker dynamically manages the assignment and removal of object IDs based on movement patterns, resulting in a more adaptive and reliable tracking system.
+| | Feature | |
+|:-:|---|---|
+| 📹 | **Any video source** | Plug in your own stream URL (CamGear) |
+| 📏 | **Your own speed lines** | Mark the lines used for speed measurement to fit any road |
+| 🎯 | **Custom tracker** | Assigns and updates IDs per vehicle, matches them across frames and drops them when they leave |
+| ⏱️ | **Live speed** | Speed from distance and time between lines, drawn on the video |
 
-- **Streamlined Integration:** The tracker seamlessly integrates with the overall speed camera system, providing real-time updates on object positions and enabling accurate speed calculations.
+<p align="center">
+  <img src="Speed-camera.png" width="70%" alt="Speed lines setup" />
+</p>
 
-These improvements collectively contribute to a more effective and responsive tracking system tailored for the specific demands of the speed camera application.
+## 🚀 Get started
 
-## Setup
+1. Download YOLOv8 weights (e.g. `yolov8s.pt`) into the project folder.
+2. Run:
 
-Download the YOLOv8 model weights (e.g., yolov8s.pt) and place them in the project directory.
+```bash
+python main.py
+```
 
-Run the main script
+3. Follow the prompts to set the video source and draw the speed lines.
 
-## File Overview
+## 🗂️ Structure
 
-This section provides a brief overview of each file in the project:
+| File | Role |
+|---|---|
+| [`main.py`](main.py) | Runs the pipeline: setup, detection, tracking and display |
+| [`setup.py`](setup.py) | Prompts for the video URL and the speed lines |
+| [`tracker.py`](tracker.py) | Vehicle tracking and ID management |
+| [`speed_check.py`](speed_check.py) | `SpeedCheck` class: speed from line crossings |
+| [`draw.py`](draw.py) | Drawing lines and labels on frames |
+| [`coco.txt`](coco.txt) | COCO class names |
 
-### 1. `main.py`
+## 🙏 Built with
 
-The main script orchestrating the speed camera system. It utilizes the YOLOv8 model for object detection, CamGear for video streaming, and OpenCV for image processing. This script initiates the entire speed camera workflow, from user setup prompts to real-time video processing.
+[YOLOv8](https://github.com/ultralytics/ultralytics) (Ultralytics) · [CamGear](https://github.com/abhiTronix/vidgear) (VidGear) · [OpenCV](https://opencv.org/) · [cvzone](https://github.com/cvzone/cvzone)
 
-### 2. `tracker.py`
-
-The `tracker` module is responsible for identifying and tracking vehicles in the video stream. It features an enhanced algorithm for object ID assignment, efficient object matching, and dynamic ID management. The improvements contribute to a more adaptive and reliable tracking system tailored for the speed camera application.
-
-### 3. `speed_check.py`
-
-The `speed_check` module contains the `SpeedCheck` class, which calculates the speed of detected objects based on their movement across speed lines. It uses distance and time measurements to determine the speed of each object and displays the results on the video stream.
-
-### 4. `setup.py`
-
-The `setup` module assists users in customizing their speed camera setup. It prompts users to input their video source URL and mark their own speed lines. This flexibility allows the system to be adapted for various cameras and road configurations.
-
-
-### 5. `draw.py`
-
-The `draw` module includes utility functions used across the project, such as drawing lines and object information on the video frame. These functions contribute to the visual representation of the speed camera system.
-
-## Dependencies
-YOLOv8
-
-CamGear
-
-OpenCV
-
-cvzone
-
-## Acknowledgments
-YOLOv8 - Ultralytics
-
-CamGear - AbhiTronix
-
-OpenCV - OpenCV team
-
-cvzone - Augmented Startups
-
-
-## Contributing
-Feel free to contribute by opening issues or pull requests. Your feedback and suggestions are highly appreciated!
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2c5364,50:203a43,100:0f2027&height=100&section=footer" width="100%" />
